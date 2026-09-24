@@ -87,7 +87,8 @@
   .ticket dt { color: var(--muted); }
   .ticket dd { margin: 0; font-weight: 500; }
   .fine { color: var(--muted); font-size: .8rem; text-align: center; }
-  footer { text-align: center; color: var(--muted); font-size: .8rem; }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+  footer .legal { font-size: .7rem; line-height: 1.6; opacity: .8; }
   header.hero { position: relative; overflow: hidden;
     background: radial-gradient(120% 80% at 80% 100%, #24190f, #0d0b09 60%); background-size: 200% 200%; }
   .hero-photo { display: block; width: calc(100% + 40px); max-width: none; margin: -36px -20px 0; height: auto; }
@@ -223,7 +224,13 @@
     </div>
   </section>
 
-  <footer>Салон «Золотые руки Егора» · Ленинский проспект, 44, подъезд 12, кв. 336 · Лицензия на обнимашки №1</footer>
+  <footer>
+    <p>Салон «Золотые руки Егора» · Ленинский проспект, 44, подъезд 12, кв. 336</p>
+    <p class="legal">ИП Егор «Золотые руки» · ОГРНИП 314159265358979 · ИНН 0000-ЛЮБЛЮ-ТЕБЯ<br>
+    ОКВЭД 96.04 «Деятельность физкультурно-оздоровительная» · Лицензия на обнимашки №1 от дня нашего знакомства<br>
+    Режим налогообложения: налог на профессиональную нежность, 0% · Член Ассоциации лучших парней России<br>
+    Имеются противопоказания: привыкание. Перед процедурой проконсультируйтесь с мастером.</p>
+  </footer>
 </div>
 <canvas id="burst" aria-hidden="true"></canvas>
 
