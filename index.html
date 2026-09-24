@@ -4,15 +4,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap">
 <style>
   :root {
-    color-scheme: light;
-    --ground: #eef2ee;
-    --paper: #ffffff;
-    --ink: #1f2e2a;
-    --muted: #5d6f69;
-    --line: #d5dfd9;
-    --eucalyptus: #2f5d50;
-    --eucalyptus-soft: #dfeae5;
-    --gold: #b08a4a;
+    color-scheme: dark;
+    --ground: #1b1714;
+    --paper: #262019;
+    --ink: #f1e4d2;
+    --muted: #a8998a;
+    --line: #3d342b;
+    --eucalyptus: #e3a255;
+    --eucalyptus-soft: #3a2c1e;
+    --gold: #d0703c;
+    --on-accent: #1b1714;
   }
   * { box-sizing: border-box; }
   body {
@@ -32,13 +33,13 @@
   header.hero {
     margin-inline: -16px;
     padding: 36px 20px 30px;
-    background: var(--eucalyptus);
-    color: #f3f7f4;
+    background: var(--ground);
+    color: var(--ink);
     display: flex; flex-direction: column; gap: 12px;
   }
-  .hero .lead { color: #cfe0d8; max-width: 34ch; }
+  .hero .lead { color: var(--muted); max-width: 34ch; }
   .hero .badges { display: flex; flex-wrap: wrap; gap: 8px; font-size: .8rem; }
-  .hero .badges span { border: 1px solid #6f9587; border-radius: 99px; padding: 4px 10px; }
+  .hero .badges span { border: 1px solid #5a4a3a; background: rgba(38,32,25,.6); border-radius: 99px; padding: 4px 10px; }
   .leaf { width: 42px; height: 42px; }
 
   .service { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
@@ -62,18 +63,18 @@
     display: block; text-align: center; padding: 10px 0; border-radius: 10px;
     border: 1px solid var(--line); background: var(--ground); font-variant-numeric: tabular-nums; cursor: pointer;
   }
-  .times input:checked + span { background: var(--eucalyptus); color: #fff; border-color: var(--eucalyptus); }
+  .times input:checked + span { background: var(--eucalyptus); color: var(--on-accent); border-color: var(--eucalyptus); }
   .times input:focus-visible + span { outline: 2px solid var(--gold); }
-  .times .busy span { color: #9aa8a3; text-decoration: line-through; cursor: not-allowed; }
+  .times .busy span { color: #6d6155; text-decoration: line-through; cursor: not-allowed; }
   fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
   legend { font-weight: 500; font-size: .92rem; margin-bottom: 6px; }
 
   button.primary {
     font: inherit; font-weight: 700; font-size: 1.05rem; border: 0; border-radius: 14px;
-    padding: 16px; background: var(--eucalyptus); color: #fff; cursor: pointer;
+    padding: 16px; background: var(--eucalyptus); color: var(--on-accent); cursor: pointer;
   }
   button.primary:active { transform: scale(.98); }
-  .err { color: #a0402f; font-size: .88rem; }
+  .err { color: #f08a6a; font-size: .88rem; }
 
   .reviews { display: flex; flex-direction: column; gap: 14px; }
   .review { border-left: 2px solid var(--gold); padding-left: 14px; }
@@ -87,17 +88,65 @@
   .ticket dd { margin: 0; font-weight: 500; }
   .fine { color: var(--muted); font-size: .8rem; text-align: center; }
   footer { text-align: center; color: var(--muted); font-size: .8rem; }
+  header.hero { position: relative; overflow: hidden;
+    background: radial-gradient(120% 80% at 80% 100%, #3a2a1c, #1b1714 60%); background-size: 200% 200%; }
+  .hero-photo { display: block; width: calc(100% + 40px); max-width: none; margin: -36px -20px 0; aspect-ratio: 1 / 1; object-fit: cover;
+    -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
+  @media (min-width: 600px) { .hero-photo { aspect-ratio: 4 / 3; } }
+  .hero > *:not(canvas) { position: relative; z-index: 1; }
+  #petals { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+  .hero h1 .shine { background: linear-gradient(100deg, #f1e4d2 30%, #ffc27a 50%, #f1e4d2 70%);
+    background-size: 250% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .service { transition: background .25s, transform .25s; border-radius: 10px; }
+  .service:active { background: var(--eucalyptus-soft); }
+  .times label span { transition: background .2s, color .2s, transform .2s; }
+  button.primary { position: relative; overflow: hidden; transition: transform .15s; }
+  button.primary::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform: skewX(-20deg); }
+  .contacts { display: flex; flex-direction: column; gap: 10px; }
+  .contacts .row { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; }
+  .contacts .ico { width: 28px; height: 28px; border-radius: 50%; background: var(--eucalyptus-soft); color: var(--eucalyptus);
+    display: grid; place-items: center; font-size: .9rem; }
+  .contacts b { display: block; }
+  .contacts small { color: var(--muted); }
+  .ticket { position: relative; }
+  .stamp { position: absolute; top: 14px; right: 12px; border: 3px solid #e0603a; color: #e0603a; border-radius: 8px;
+    padding: 2px 8px; font-weight: 800; font-size: .8rem; letter-spacing: .08em; transform: rotate(-14deg); }
+  #burst { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+
   @media (prefers-reduced-motion: no-preference) {
-    .ticket { animation: rise .5s ease-out; }
-    @keyframes rise { from { transform: translateY(12px); } to { transform: none; } }
+    header.hero { animation: flow 12s ease-in-out infinite; }
+    @keyframes flow { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .hero > .leaf { animation: sway 4s ease-in-out infinite; transform-origin: 50% 100%; }
+    @keyframes sway { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+    .hero > .eyebrow, .hero > h1, .hero > .lead, .hero > .badges { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+    .hero > h1 { animation-delay: .1s; } .hero > .lead { animation-delay: .2s; } .hero > .badges { animation-delay: .3s; }
+    .hero h1 .shine { animation: shine 5s ease-in-out 1s infinite; }
+    @keyframes shine { 0% { background-position: 100% 0; } 40%,100% { background-position: -50% 0; } }
+    .service { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
+    .service:nth-child(2) { animation-delay: .1s; } .service:nth-child(3) { animation-delay: .2s; } .service:nth-child(4) { animation-delay: .3s; }
+    @keyframes rise { from { opacity: .001; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .times input:checked + span { animation: pop .35s ease-out; }
+    @keyframes pop { 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    button.primary { animation: breathe 2.6s ease-in-out infinite; }
+    @keyframes breathe { 0%,100% { box-shadow: 0 0 0 0 rgba(227,162,85,.4); } 50% { box-shadow: 0 0 0 10px rgba(227,162,85,0); } }
+    button.primary::after { animation: sweep 3.5s ease-in-out infinite; }
+    @keyframes sweep { 0%,60% { left: -60%; } 100% { left: 130%; } }
+    .stars { display: inline-block; animation: twinkle 2.4s ease-in-out infinite; }
+    @keyframes twinkle { 50% { filter: brightness(1.35); transform: scale(1.04); } }
+    .ticket:not([hidden]) { animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
+    .ticket:not([hidden]) .stamp { animation: stamp .5s cubic-bezier(.3,1.6,.5,1) .5s both; }
+    @keyframes stamp { from { opacity: 0; transform: rotate(-14deg) scale(2.6); } to { opacity: 1; transform: rotate(-14deg) scale(1); } }
   }
 </style>
 
 <div class="wrap">
   <header class="hero">
-    <svg class="leaf" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 44C12 36 8 22 24 4c16 18 12 32 0 40z" fill="none" stroke="#d9c08f" stroke-width="2"/><path d="M24 12v30" stroke="#d9c08f" stroke-width="2"/></svg>
+    <canvas id="petals" aria-hidden="true"></canvas>
+    <img class="hero-photo" src="photo.jpg" alt="Мастер Егор за работой" onerror="this.hidden=true">
+    <svg class="leaf" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 44C12 36 8 22 24 4c16 18 12 32 0 40z" fill="none" stroke="#e3a255" stroke-width="2"/><path d="M24 12v30" stroke="#e3a255" stroke-width="2"/></svg>
     <div class="eyebrow">Спа-салон премиум-класса · 1 мастер · 1 клиентка</div>
-    <h1>Золотые руки Егора</h1>
+    <h1>Золотые руки <span class="shine">Егора</span></h1>
     <p class="lead">Авторский массаж для самой красивой девушки на свете. Запись открыта только для тебя.</p>
     <div class="badges"><span>★ 5.0 из 5</span><span>Без выходных</span><span>Оплата поцелуями</span></div>
   </header>
@@ -142,12 +191,14 @@
       </form>
     </div>
     <div class="card ticket" id="ticket" hidden>
+      <div class="stamp">ОДОБРЕНО</div>
       <div class="eyebrow">Запись подтверждена</div>
       <div class="num" id="tNum"></div>
       <dl>
         <dt>Клиентка</dt><dd id="tName"></dd>
         <dt>Процедура</dt><dd id="tService"></dd>
         <dt>Когда</dt><dd id="tWhen"></dd>
+        <dt>Адрес</dt><dd>Ленинский пр., 44, под. 12, кв. 336</dd>
         <dt>Мастер</dt><dd>Егор, стаж: вся жизнь</dd>
         <dt>Пожелания</dt><dd id="tWish"></dd>
       </dl>
@@ -165,10 +216,66 @@
     </div>
   </section>
 
-  <footer>Салон «Золотые руки Егора» · Адрес: дома, на диване · Лицензия на обнимашки №1</footer>
+  <section>
+    <h2>Как нас найти</h2>
+    <div class="card contacts">
+      <div class="row"><span class="ico">⌂</span><div><b>Ленинский проспект, 44</b><small>Подъезд 12, квартира 336</small></div></div>
+      <div class="row"><span class="ico">◷</span><div><b>Каждый день, 21:00 – 01:00</b><small>Для любимой клиентки возможны исключения</small></div></div>
+      <div class="row"><span class="ico">♡</span><div><b>Мастер Егор</b><small>Встретит у двери с тапочками</small></div></div>
+    </div>
+  </section>
+
+  <footer>Салон «Золотые руки Егора» · Ленинский проспект, 44, подъезд 12, кв. 336 · Лицензия на обнимашки №1</footer>
 </div>
+<canvas id="burst" aria-hidden="true"></canvas>
 
 <script>
+
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Falling petals in the hero
+  (() => {
+    const c = document.getElementById("petals"), x = c.getContext("2d");
+    let W, H, ps = [];
+    const size = () => { const r = c.getBoundingClientRect(), d = devicePixelRatio || 1;
+      W = r.width; H = r.height; c.width = W * d; c.height = H * d; x.setTransform(d, 0, 0, d, 0, 0); };
+    size(); addEventListener("resize", size);
+    const mk = y => ({ x: Math.random() * W, y: y ?? -10, r: 3 + Math.random() * 4, vy: .3 + Math.random() * .5,
+      a: Math.random() * 6, va: .01 + Math.random() * .02, rot: Math.random() * 6, hue: Math.random() < .5 ? "#ffb35c" : "#ffd9a0" });
+    for (let i = 0; i < 18; i++) ps.push(mk(Math.random() * H));
+    const draw = () => {
+      x.clearRect(0, 0, W, H);
+      for (const p of ps) {
+        x.save(); x.translate(p.x + Math.sin(p.a) * 12, p.y); x.rotate(p.rot + p.a);
+        x.globalAlpha = .7; x.shadowColor = p.hue; x.shadowBlur = 8; x.fillStyle = p.hue;
+        x.beginPath(); x.ellipse(0, 0, p.r, p.r * .55, 0, 0, Math.PI * 2); x.fill(); x.restore();
+        if (!calm) { p.y += p.vy; p.a += p.va; if (p.y > H + 10) Object.assign(p, mk()); }
+      }
+      if (!calm) requestAnimationFrame(draw);
+    };
+    draw();
+  })();
+
+  // Heart burst on booking
+  function burst() {
+    if (calm) return;
+    const c = document.getElementById("burst"), x = c.getContext("2d"), d = devicePixelRatio || 1;
+    const W = innerWidth, H = innerHeight; c.width = W * d; c.height = H * d; x.setTransform(d, 0, 0, d, 0, 0);
+    const cols = ["#e0603a", "#e3a255", "#ffd9a0", "#c2552b", "#f1e4d2"];
+    const hs = Array.from({ length: 70 }, () => ({ x: W / 2, y: H * .55, vx: (Math.random() - .5) * 12,
+      vy: -6 - Math.random() * 10, s: 8 + Math.random() * 10, c: cols[Math.random() * cols.length | 0], rot: Math.random() * 6, vr: (Math.random() - .5) * .2 }));
+    const heart = (s) => { x.beginPath(); x.moveTo(0, s * .3);
+      x.bezierCurveTo(0, 0, -s * .5, 0, -s * .5, s * .3); x.bezierCurveTo(-s * .5, s * .6, 0, s * .8, 0, s);
+      x.bezierCurveTo(0, s * .8, s * .5, s * .6, s * .5, s * .3); x.bezierCurveTo(s * .5, 0, 0, 0, 0, s * .3); x.fill(); };
+    let t = 0;
+    (function f() {
+      x.clearRect(0, 0, W, H);
+      for (const h of hs) { h.vy += .28; h.vx *= .99; h.x += h.vx; h.y += h.vy; h.rot += h.vr;
+        x.save(); x.translate(h.x, h.y); x.rotate(h.rot); x.fillStyle = h.c; x.globalAlpha = Math.max(0, 1 - t / 150); heart(h.s); x.restore(); }
+      if (++t < 150) requestAnimationFrame(f); else x.clearRect(0, 0, W, H);
+    })();
+  }
+
   const slots = [["20:00",1],["21:00",0],["22:00",0],["23:00",0],["00:00",0],["01:00",0]];
   const times = document.getElementById("times");
   slots.forEach(([t, busy], i) => {
@@ -196,6 +303,7 @@
     document.getElementById("tWish").textContent = f.wish.value.trim() || "На усмотрение мастера";
     document.getElementById("formCard").hidden = true;
     document.getElementById("ticket").hidden = false;
+    burst();
     document.getElementById("ticket").scrollIntoView({ behavior: "smooth", block: "start" });
   });
 </script>
