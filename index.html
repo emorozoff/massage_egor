@@ -1,0 +1,200 @@
+<title>Золотые руки Егора</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;700&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --ground: #eef2ee;
+    --paper: #ffffff;
+    --ink: #1f2e2a;
+    --muted: #5d6f69;
+    --line: #d5dfd9;
+    --eucalyptus: #2f5d50;
+    --eucalyptus-soft: #dfeae5;
+    --gold: #b08a4a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font: 16px/1.55 "Manrope", system-ui, sans-serif;
+    padding-inline: 16px;
+    padding-block: 0 48px;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+  h1, h2, .serif { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2.6rem; line-height: 1.05; margin: 0; }
+  h2 { font-size: 1.7rem; margin: 0 0 12px; }
+  p { margin: 0; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 700; color: var(--gold); }
+
+  header.hero {
+    margin-inline: -16px;
+    padding: 36px 20px 30px;
+    background: var(--eucalyptus);
+    color: #f3f7f4;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .hero .lead { color: #cfe0d8; max-width: 34ch; }
+  .hero .badges { display: flex; flex-wrap: wrap; gap: 8px; font-size: .8rem; }
+  .hero .badges span { border: 1px solid #6f9587; border-radius: 99px; padding: 4px 10px; }
+  .leaf { width: 42px; height: 42px; }
+
+  .service { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .service:last-child { border-bottom: 0; }
+  .service b { font-weight: 700; }
+  .service .price { font-weight: 700; color: var(--eucalyptus); white-space: nowrap; }
+  .service small { grid-column: 1 / -1; color: var(--muted); font-size: .88rem; }
+
+  .card { background: var(--paper); border-radius: 18px; padding: 22px 18px; border: 1px solid var(--line); }
+
+  form { display: flex; flex-direction: column; gap: 16px; }
+  label { display: flex; flex-direction: column; gap: 6px; font-weight: 500; font-size: .92rem; }
+  input, select, textarea {
+    font: inherit; color: var(--ink); background: var(--ground);
+    border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; width: 100%;
+  }
+  input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .times { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .times input { position: absolute; opacity: 0; pointer-events: none; }
+  .times label span {
+    display: block; text-align: center; padding: 10px 0; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--ground); font-variant-numeric: tabular-nums; cursor: pointer;
+  }
+  .times input:checked + span { background: var(--eucalyptus); color: #fff; border-color: var(--eucalyptus); }
+  .times input:focus-visible + span { outline: 2px solid var(--gold); }
+  .times .busy span { color: #9aa8a3; text-decoration: line-through; cursor: not-allowed; }
+  fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+  legend { font-weight: 500; font-size: .92rem; margin-bottom: 6px; }
+
+  button.primary {
+    font: inherit; font-weight: 700; font-size: 1.05rem; border: 0; border-radius: 14px;
+    padding: 16px; background: var(--eucalyptus); color: #fff; cursor: pointer;
+  }
+  button.primary:active { transform: scale(.98); }
+  .err { color: #a0402f; font-size: .88rem; }
+
+  .reviews { display: flex; flex-direction: column; gap: 14px; }
+  .review { border-left: 2px solid var(--gold); padding-left: 14px; }
+  .review .who { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+  .stars { color: var(--gold); letter-spacing: 2px; }
+
+  .ticket { text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+  .ticket .num { font-family: "Cormorant Garamond", Georgia, serif; font-size: 2.2rem; color: var(--eucalyptus); }
+  .ticket dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; text-align: left; margin: 8px 0; width: 100%; }
+  .ticket dt { color: var(--muted); }
+  .ticket dd { margin: 0; font-weight: 500; }
+  .fine { color: var(--muted); font-size: .8rem; text-align: center; }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    .ticket { animation: rise .5s ease-out; }
+    @keyframes rise { from { transform: translateY(12px); } to { transform: none; } }
+  }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <svg class="leaf" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 44C12 36 8 22 24 4c16 18 12 32 0 40z" fill="none" stroke="#d9c08f" stroke-width="2"/><path d="M24 12v30" stroke="#d9c08f" stroke-width="2"/></svg>
+    <div class="eyebrow">Спа-салон премиум-класса · 1 мастер · 1 клиентка</div>
+    <h1>Золотые руки Егора</h1>
+    <p class="lead">Авторский массаж для самой красивой девушки на свете. Запись открыта только для тебя.</p>
+    <div class="badges"><span>★ 5.0 из 5</span><span>Без выходных</span><span>Оплата поцелуями</span></div>
+  </header>
+
+  <section>
+    <h2>Услуги</h2>
+    <div class="card">
+      <div class="service"><b>Классический массаж спины</b><span class="price">5 поцелуев</span><small>60 минут. Снимает стресс после рабочего дня.</small></div>
+      <div class="service"><b>Массаж ножек</b><span class="price">3 поцелуя</span><small>40 минут. Особенно хорошо после каблуков.</small></div>
+      <div class="service"><b>Массаж головы и плеч</b><span class="price">4 поцелуя</span><small>30 минут. Засыпание во время процедуры включено.</small></div>
+      <div class="service"><b>Программа «Королева»</b><span class="price">1 обнимашка + ужин</span><small>90 минут. Всё сразу, с аромамаслами и свечами.</small></div>
+    </div>
+  </section>
+
+  <section id="book">
+    <h2>Онлайн-запись</h2>
+    <div class="card" id="formCard">
+      <form id="form" novalidate>
+        <label for="name">Как к вам обращаться
+          <input id="name" name="name" placeholder="Например, Солнышко" autocomplete="off">
+        </label>
+        <label for="service">Процедура
+          <select id="service" name="service">
+            <option>Классический массаж спины</option>
+            <option>Массаж ножек</option>
+            <option>Массаж головы и плеч</option>
+            <option selected>Программа «Королева»</option>
+          </select>
+        </label>
+        <label for="date">Дата
+          <input id="date" name="date" type="date">
+        </label>
+        <fieldset>
+          <legend>Время</legend>
+          <div class="times" id="times"></div>
+        </fieldset>
+        <label for="wish">Пожелания мастеру
+          <textarea id="wish" name="wish" rows="3" placeholder="Посильнее, послабее, с котиком рядом…"></textarea>
+        </label>
+        <p class="err" id="err" hidden></p>
+        <button class="primary" type="submit">Записаться</button>
+      </form>
+    </div>
+    <div class="card ticket" id="ticket" hidden>
+      <div class="eyebrow">Запись подтверждена</div>
+      <div class="num" id="tNum"></div>
+      <dl>
+        <dt>Клиентка</dt><dd id="tName"></dd>
+        <dt>Процедура</dt><dd id="tService"></dd>
+        <dt>Когда</dt><dd id="tWhen"></dd>
+        <dt>Мастер</dt><dd>Егор, стаж: вся жизнь</dd>
+        <dt>Пожелания</dt><dd id="tWish"></dd>
+      </dl>
+      <p>Сделай скриншот и отправь мастеру. Он уже греет руки.</p>
+      <p class="fine">Отменить запись нельзя. Перенести можно только на более раннее время.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Отзывы</h2>
+    <div class="reviews">
+      <div class="review"><div class="stars">★★★★★</div><p>Уснула на третьей минуте. Проснулась счастливой. Рекомендую.</p><div class="who">Постоянная клиентка</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>Руки золотые, характер тоже. Минус одна звезда за холодные пальцы, но я её вернула.</p><div class="who">Та же клиентка</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>Лучший салон в городе. Других не пробовала и не собираюсь.</p><div class="who">Опять она</div></div>
+    </div>
+  </section>
+
+  <footer>Салон «Золотые руки Егора» · Адрес: дома, на диване · Лицензия на обнимашки №1</footer>
+</div>
+
+<script>
+  const slots = [["18:00",0],["19:00",0],["20:00",0],["21:00",0],["22:00",0],["03:00",1]];
+  const times = document.getElementById("times");
+  slots.forEach(([t, busy], i) => {
+    const l = document.createElement("label");
+    if (busy) l.className = "busy";
+    l.innerHTML = `<input type="radio" name="time" id="t${i}" value="${t}" ${busy ? "disabled" : ""} ${i === 2 ? "checked" : ""}><span>${t}</span>`;
+    times.appendChild(l);
+  });
+  const d = new Date();
+  const iso = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  const dateEl = document.getElementById("date");
+  dateEl.value = iso; dateEl.min = iso;
+
+  document.getElementById("form").addEventListener("submit", e => {
+    e.preventDefault();
+    const f = e.target, err = document.getElementById("err");
+    const name = f.name.value.trim();
+    if (!name) { err.textContent = "Напиши, как к тебе обращаться. Мастер должен знать, кого баловать."; err.hidden = false; f.name.focus(); return; }
+    const time = (f.querySelector("input[name=time]:checked") || {}).value || "20:00";
+    const date = f.date.value ? new Date(f.date.value + "T00:00").toLocaleDateString("ru-RU", { day: "numeric", month: "long", weekday: "long" }) : "сегодня";
+    document.getElementById("tNum").textContent = "№ " + (100 + Math.floor(Math.random() * 900)) + "-❤";
+    document.getElementById("tName").textContent = name;
+    document.getElementById("tService").textContent = f.service.value;
+    document.getElementById("tWhen").textContent = date + ", " + time;
+    document.getElementById("tWish").textContent = f.wish.value.trim() || "На усмотрение мастера";
+    document.getElementById("formCard").hidden = true;
+    document.getElementById("ticket").hidden = false;
+    document.getElementById("ticket").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+</script>
